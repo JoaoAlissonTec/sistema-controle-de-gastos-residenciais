@@ -1,0 +1,6 @@
+@SistemaControleGastosResidenciaisAPI_HostAddress = http://localhost:5090
+
+GET {{SistemaControleGastosResidenciaisAPI_HostAddress}}/api/Persons/
+Accept: application/json
+
+###
