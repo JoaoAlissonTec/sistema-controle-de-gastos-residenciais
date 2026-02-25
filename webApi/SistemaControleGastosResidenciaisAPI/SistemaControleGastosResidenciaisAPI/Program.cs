@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaControleGastosResidenciaisAPI;
-using SistemaControleGastosResidenciaisAPI.Repositories;
-using SistemaControleGastosResidenciaisAPI.Services;
+using SistemaControleGastosResidenciaisAPI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,16 +8,16 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext <BaseContext>(option => option.UseSqlite(connectionString));
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

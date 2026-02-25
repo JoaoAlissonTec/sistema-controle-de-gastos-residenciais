@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using SistemaControleGastosResidenciaisAPI.Models;
 
 namespace SistemaControleGastosResidenciaisAPI.Repositories
@@ -7,10 +8,7 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
     {
         private readonly BaseContext _context;
 
-        public PersonRepository(BaseContext context)
-        {
-            _context = context;
-        }
+        public PersonRepository(BaseContext context) => _context = context;
 
         public async Task<Person> AddAsync(Person person)
         {
@@ -26,7 +24,7 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
 
             if(person == null)
             {
-                throw new Exception("Person not found.");
+                throw new SqliteException("Person not found.", 404);
             }
 
             _context.Remove(person);
@@ -45,7 +43,7 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
 
             if(person == null)
             {
-                throw new Exception("Person not found.");
+                throw new SqliteException("Person not found.", 404);
             }
 
             return person;
@@ -53,10 +51,20 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
 
         public async Task<Person> UpdateAsync(Person person)
         {
+            if (!ValidatePersonExist(person.Id))
+            {
+                throw new SqliteException("Person not found.", 404);
+            }
+
             _context.Update(person);
             _context.SaveChanges();
 
             return person;
+        }
+
+        private bool ValidatePersonExist(Guid id)
+        {
+            return _context.Persons.Any(p => p.Id == id);
         }
     }
 }

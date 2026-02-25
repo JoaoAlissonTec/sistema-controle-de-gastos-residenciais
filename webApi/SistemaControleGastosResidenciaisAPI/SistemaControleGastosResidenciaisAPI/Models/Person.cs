@@ -1,9 +1,26 @@
-﻿namespace SistemaControleGastosResidenciaisAPI.Models
+﻿using SistemaControleGastosResidenciaisAPI.DTOs;
+using System.ComponentModel.DataAnnotations;
+
+namespace SistemaControleGastosResidenciaisAPI.Models
 {
     public class Person
     {
         public Guid Id { get; set; }
+
+        [MaxLength(200)]
         public required string Name { get; set; }
+
+        [Range(0, 150, ErrorMessage = "Age must be greater than 0.")]
         public required int Age { get; set; }
+
+        public static Person ToModel(CreatePersonDTO dto)
+        {
+            return new Person
+            {
+                Id = Guid.NewGuid(),
+                Name = dto.Name,
+                Age = dto.Age
+            };
+        }
     }
 }

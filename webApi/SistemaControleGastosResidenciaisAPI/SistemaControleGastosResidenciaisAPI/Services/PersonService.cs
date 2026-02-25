@@ -1,4 +1,5 @@
-﻿using SistemaControleGastosResidenciaisAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaControleGastosResidenciaisAPI.Models;
 using SistemaControleGastosResidenciaisAPI.Repositories;
 
 namespace SistemaControleGastosResidenciaisAPI.Services
@@ -6,10 +7,7 @@ namespace SistemaControleGastosResidenciaisAPI.Services
     public class PersonService : IPersonService
     {
         private readonly IPersonRepository _personRepository;
-        public PersonService(IPersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
+        public PersonService(IPersonRepository personRepository) => _personRepository = personRepository;
 
         public async Task<Person> AddAsync(Person person)
         {
