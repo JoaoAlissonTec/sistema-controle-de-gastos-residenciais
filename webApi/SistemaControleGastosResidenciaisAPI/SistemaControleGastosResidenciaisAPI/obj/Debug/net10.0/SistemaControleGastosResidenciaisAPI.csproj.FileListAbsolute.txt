@@ -528,7 +528,7 @@ C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\Si
 C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\obj\Debug\net10.0\SistemaControleGastosResidenciaisAPI.pdb
 C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\obj\Debug\net10.0\SistemaControleGastosResidenciaisAPI.genruntimeconfig.cache
 C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\obj\Debug\net10.0\ref\SistemaControleGastosResidenciaisAPI.dll
-C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Dev\Documents\alisson\sistema-controle-de-gastos-residenciais\webApi\SistemaControleGastosResidenciaisAPI\SistemaControleGastosResidenciaisAPI\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

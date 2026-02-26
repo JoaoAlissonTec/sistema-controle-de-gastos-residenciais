@@ -12,6 +12,9 @@ namespace SistemaControleGastosResidenciaisAPI.Helpers
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<ITransactionService, TransactionService>();
         }
     }
 }

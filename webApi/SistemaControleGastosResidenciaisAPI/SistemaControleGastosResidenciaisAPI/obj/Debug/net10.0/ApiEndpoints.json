@@ -215,5 +215,77 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaControleGastosResidenciaisAPI.Controller.TransactionsController",
+    "Method": "GetTransactions",
+    "RelativePath": "api/Transactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Transaction, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SistemaControleGastosResidenciaisAPI.Controller.TransactionsController",
+    "Method": "PostTransaction",
+    "RelativePath": "api/Transactions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transactionDTO",
+        "Type": "SistemaControleGastosResidenciaisAPI.DTOs.CreateTransactionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.Transaction",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SistemaControleGastosResidenciaisAPI.Controller.TransactionsController",
+    "Method": "GetTransaction",
+    "RelativePath": "api/Transactions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.Transaction",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

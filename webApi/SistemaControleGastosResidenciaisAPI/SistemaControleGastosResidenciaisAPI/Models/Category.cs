@@ -1,6 +1,7 @@
 ﻿using SistemaControleGastosResidenciaisAPI.DTOs;
 using SistemaControleGastosResidenciaisAPI.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SistemaControleGastosResidenciaisAPI.Models
 {
@@ -13,6 +14,8 @@ namespace SistemaControleGastosResidenciaisAPI.Models
         
         [EnumDataType(typeof(CategoryType))]
         public required CategoryType Type { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Transaction> Transactions { get; set; }
 
         public static Category ToModel(CreateCategoryDTO categoryDTO)
         {

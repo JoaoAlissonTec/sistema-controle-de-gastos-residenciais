@@ -1,5 +1,6 @@
 ﻿using SistemaControleGastosResidenciaisAPI.DTOs;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SistemaControleGastosResidenciaisAPI.Models
 {
@@ -12,6 +13,8 @@ namespace SistemaControleGastosResidenciaisAPI.Models
 
         [Range(0, 150, ErrorMessage = "Age must be greater than 0.")]
         public required int Age { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Transaction> Transactions { get; set; }
 
         public static Person ToModel(CreatePersonDTO dto)
         {
