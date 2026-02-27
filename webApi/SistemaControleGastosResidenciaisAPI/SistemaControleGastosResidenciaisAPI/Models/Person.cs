@@ -13,8 +13,7 @@ namespace SistemaControleGastosResidenciaisAPI.Models
 
         [Range(0, 150, ErrorMessage = "Age must be greater than 0.")]
         public required int Age { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
         public static Person ToModel(CreatePersonDTO dto)
         {

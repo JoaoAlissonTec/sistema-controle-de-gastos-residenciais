@@ -10,10 +10,22 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
         private readonly BaseContext _context;
         public TransactionRepository(BaseContext context) => _context = context;
 
-        public async Task<List<Transaction>> GetAllAsync()
+        public async Task<PagedResult<Transaction>> GetAllAsync(int page, int pageSize)
         {
-            var transactions = await _context.Transactions.ToListAsync();
-            return transactions;
+            var query = _context.Transactions.AsQueryable();
+            var totalCount = await query.CountAsync();
+            var transactions = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Transaction>
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                Data = transactions
+            };
         }
         public async Task<Transaction> GetByIdAsync(Guid id)
         {

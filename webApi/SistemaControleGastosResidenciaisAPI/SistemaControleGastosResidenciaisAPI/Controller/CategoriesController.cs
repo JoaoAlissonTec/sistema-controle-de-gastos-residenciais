@@ -22,9 +22,9 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
         public CategoriesController(ICategoryService categoryService) => _categoryService = categoryService;
 
         [HttpGet]
-        public async Task<ActionResult<List<Category>>> GetCategories()
+        public async Task<ActionResult<List<Category>>> GetCategories([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var categories = await _categoryService.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync(page, pageSize);
             return Ok(categories);
         }
 

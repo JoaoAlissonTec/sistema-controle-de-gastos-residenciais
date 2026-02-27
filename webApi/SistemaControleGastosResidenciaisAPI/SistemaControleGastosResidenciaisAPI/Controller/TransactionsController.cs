@@ -15,9 +15,9 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
         public TransactionsController(ITransactionService transactionService) => _transactionService = transactionService;
 
         [HttpGet]
-        public async Task<ActionResult<List<Transaction>>> GetTransactions()
+        public async Task<ActionResult<List<Transaction>>> GetTransactions([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var transactions = await _transactionService.GetAllAsync();
+            var transactions = await _transactionService.GetAllAsync(page, pageSize);
             return Ok(transactions);
         }
 

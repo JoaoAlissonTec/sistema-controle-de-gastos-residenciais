@@ -17,15 +17,31 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
             return category;
         }
 
-        public async Task<List<Category>> GetAllAsync()
+        public async Task<PagedResult<Category>> GetAllAsync(int page, int pageSize)
         {
-            var categories = await _context.Categories.ToListAsync();
-            return categories;
+            var query = _context.Categories.AsQueryable();
+            var totalCount = await query.CountAsync();
+            var categories = await query
+                .Include(c => c.Transactions)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Category>
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                Data = categories
+            };
         }
 
         public async Task<Category> GetByIdAsync(Guid id)
         {
-            var category = await _context.FindAsync<Category>(id);
+            var query = _context.Categories.AsQueryable();
+            var category = await query
+                .Include(c => c.Transactions)
+                .FirstOrDefaultAsync(c => c.Id == id);
             if(category == null)
             {
                 throw new SqliteException("Category not found", 404);

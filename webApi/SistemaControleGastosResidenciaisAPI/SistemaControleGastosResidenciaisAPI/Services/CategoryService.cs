@@ -14,9 +14,12 @@ namespace SistemaControleGastosResidenciaisAPI.Services
             return result;
         }
 
-        public async Task<List<Category>> GetAllAsync()
+        public async Task<PagedResult<Category>> GetAllAsync(int page, int pageSize)
         {
-            var results = await _categoryRepository.GetAllAsync();
+            if (pageSize < 1) pageSize = 1;
+            if (pageSize > 100) pageSize = 100;
+
+            var results = await _categoryRepository.GetAllAsync(page, pageSize);
             return results;
         }
 

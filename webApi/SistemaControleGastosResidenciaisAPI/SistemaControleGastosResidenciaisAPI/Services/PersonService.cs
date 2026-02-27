@@ -20,9 +20,12 @@ namespace SistemaControleGastosResidenciaisAPI.Services
             await _personRepository.DeleteAsync(id);
         }
 
-        public async Task<List<Person>> GetAllAsync()
+        public async Task<PagedResult<Person>> GetAllAsync(int page, int pageSize)
         {
-            var results = await _personRepository.GetAllAsync();
+            if(pageSize < 1) pageSize = 1;
+            if(pageSize > 100) pageSize = 100;
+
+            var results = await _personRepository.GetAllAsync(page, pageSize);
             return results;
         }
 

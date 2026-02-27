@@ -16,9 +16,12 @@ namespace SistemaControleGastosResidenciaisAPI.Services
             _personRepository = personRepository;
         }
 
-        public async Task<List<Transaction>> GetAllAsync()
+        public async Task<PagedResult<Transaction>> GetAllAsync(int page, int pageSize)
         {
-            var transactions = await _transactionRepository.GetAllAsync();
+            if(pageSize < 1) pageSize = 1;
+            if(pageSize > 100) pageSize = 100;
+
+            var transactions = await _transactionRepository.GetAllAsync(page, pageSize);
             return transactions;
         }
 

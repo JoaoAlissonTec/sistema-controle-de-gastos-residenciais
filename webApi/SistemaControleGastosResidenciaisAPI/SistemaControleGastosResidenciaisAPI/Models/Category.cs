@@ -14,8 +14,7 @@ namespace SistemaControleGastosResidenciaisAPI.Models
         
         [EnumDataType(typeof(CategoryType))]
         public required CategoryType Type { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
         public static Category ToModel(CreateCategoryDTO categoryDTO)
         {

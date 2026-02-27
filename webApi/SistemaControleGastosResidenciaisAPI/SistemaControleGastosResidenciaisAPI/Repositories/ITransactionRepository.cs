@@ -4,7 +4,7 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
 {
     public interface ITransactionRepository
     {
-        public Task<List<Transaction>> GetAllAsync();
+        public Task<PagedResult<Transaction>> GetAllAsync(int page, int pageSize);
         public Task<Transaction> GetByIdAsync(Guid id);
         public Task<Transaction> AddAsync(Transaction transaction);
     }

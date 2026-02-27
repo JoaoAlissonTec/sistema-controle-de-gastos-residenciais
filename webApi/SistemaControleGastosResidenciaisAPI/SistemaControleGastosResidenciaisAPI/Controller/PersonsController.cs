@@ -16,11 +16,11 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
         public PersonsController(IPersonService personService) => _personService = personService;
 
         [HttpGet]
-        public async Task<ActionResult<List<Person>>> GetPersons()
+        public async Task<ActionResult<List<Person>>> GetPersons([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
             try
             {
-                var persons = await _personService.GetAllAsync();
+                var persons = await _personService.GetAllAsync(page, pageSize);
                 return Ok(persons);
             }
             catch (Exception) {

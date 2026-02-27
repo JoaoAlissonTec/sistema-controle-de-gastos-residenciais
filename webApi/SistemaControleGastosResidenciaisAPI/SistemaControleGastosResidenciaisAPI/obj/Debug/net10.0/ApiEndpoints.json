@@ -6,7 +6,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Category, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -78,7 +89,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Person, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -223,7 +245,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Transaction, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",

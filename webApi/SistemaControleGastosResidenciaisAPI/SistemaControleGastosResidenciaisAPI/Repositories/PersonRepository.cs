@@ -31,15 +31,33 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
             _context.SaveChanges();
         }
 
-        public async Task<List<Person>> GetAllAsync()
+        public async Task<PagedResult<Person>> GetAllAsync(int page, int pageSize)
         {
-            var persons = await _context.Persons.ToListAsync();
-            return persons;
+            var query = _context.Persons.AsQueryable();
+            var totalPage = await query.CountAsync();
+            var persons = await query
+                .Include(p => p.Transactions)
+                    .ThenInclude(t => t.Category)
+                .Skip((page-1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResult<Person>
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalPage,
+                Data = persons
+            };
         }
 
         public async Task<Person> GetByIdAsync(Guid id)
         {
-            var person = await _context.FindAsync<Person>(id);
+            var query = _context.Persons.AsQueryable();
+            var person = await query
+                .Include(p => p.Transactions)
+                    .ThenInclude(t => t.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if(person == null)
             {
