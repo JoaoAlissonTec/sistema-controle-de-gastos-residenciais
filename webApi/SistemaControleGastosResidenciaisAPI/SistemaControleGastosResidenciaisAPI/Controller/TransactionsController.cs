@@ -15,18 +15,27 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
         public TransactionsController(ITransactionService transactionService) => _transactionService = transactionService;
 
         [HttpGet]
-        public async Task<ActionResult<List<Transaction>>> GetTransactions([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        public async Task<ActionResult<PagedResult<TransactionDTO>>> GetTransactions([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var transactions = await _transactionService.GetAllAsync(page, pageSize);
+            var result = await _transactionService.GetAllAsync(page, pageSize);
+            var transactions = new PagedResult<TransactionDTO>
+            {
+                Page = result.Page,
+                PageSize = result.PageSize,
+                TotalCount = result.TotalCount,
+                Data = result.Data.Select(TransactionDTO.ToDTO).ToList()
+            };
+
             return Ok(transactions);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Transaction>> GetTransaction(Guid id)
+        public async Task<ActionResult<TransactionDTO>> GetTransaction(Guid id)
         {
             try
             {
-                var transaction = await _transactionService.GetByIdAsync(id);
+                var result = await _transactionService.GetByIdAsync(id);
+                var transaction = TransactionDTO.ToDTO(result);
                 return Ok(transaction);
             }
             catch (SqliteException ex) when (ex.SqliteErrorCode == 404)
@@ -40,14 +49,15 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<Transaction>> PostTransaction(CreateTransactionDTO transactionDTO)
+        public async Task<ActionResult<TransactionDTO>> PostTransaction(CreateTransactionDTO transactionDTO)
         {
             try
             {
                 var transaction = Transaction.ToModel(transactionDTO);
-
                 var result = await _transactionService.AddAsync(transaction);
-                return CreatedAtAction(nameof(PostTransaction), new { id = transaction.Id }, transaction);
+
+                var transactionDTOResult = TransactionDTO.ToDTO(result);
+                return CreatedAtAction(nameof(PostTransaction), new { id = transactionDTOResult.Id }, transactionDTOResult);
             }
             catch (SqliteException ex) when (ex.SqliteErrorCode == 404)
             {

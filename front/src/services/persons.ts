@@ -1,23 +1,24 @@
 import { api } from "../config/axios";
+import type { PagedResultWithTotals } from "../interfaces/PagedResult";
+import type { Transaction } from "./transactions";
 
-interface PagedResult<T> {
-    page: number,
-    pageSize: number,
-    totalCount: number,
-    totalPages: number,
-    data: T
-}
-
-interface Person {
-    id: string,
+export interface Person {
+    id?: string,
     name: string,
-    age: number
+    age: number,
+    transactions?: Transaction[]
 }
 
-export default function Persons() {
-    async function getAll(page = 1): Promise<PagedResult<Person[]> | undefined> {
+interface PersonWithTotals extends Person {
+    totalIncome: number, 
+    totalExpense: number,
+    balance: number
+}
+
+export function Persons() {
+    async function getAll(page = 1): Promise<PagedResultWithTotals<PersonWithTotals[]> | undefined> {
         try{
-            const response = await api.get(`/Persons?page=${page}`)
+            const response = await api.get(`/Persons/TotalTransactions?page=${page}`)
             const data = response.data;
 
             return data
@@ -26,5 +27,27 @@ export default function Persons() {
         }
     }
 
-    return {getAll}
+    async function getById(id: string): Promise<Person | undefined> {
+        try{
+            const response = await api.get(`/Persons/${id}`)
+            const data = response.data;
+
+            return data
+        }catch(err){
+            throw err;
+        }
+    }
+
+    async function add(person: Person): Promise<Person | undefined> {
+        try {
+            const response = await api.post("/Persons", person);
+            const data = response.data;
+
+            return data;
+        }catch(err) {
+            throw err;
+        }
+    }
+
+    return {getAll, getById, add}
 }

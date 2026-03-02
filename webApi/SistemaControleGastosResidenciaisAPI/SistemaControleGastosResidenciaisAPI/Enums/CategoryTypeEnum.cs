@@ -2,7 +2,7 @@
 {
     public enum CategoryType
     {
-        REVENUE = 0,
+        INCOME = 0,
         EXPENSE = 1,
         BOTH = 2
     }

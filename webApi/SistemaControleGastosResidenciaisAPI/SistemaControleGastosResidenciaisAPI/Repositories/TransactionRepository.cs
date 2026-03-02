@@ -1,5 +1,7 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using SistemaControleGastosResidenciaisAPI.DTOs;
 using SistemaControleGastosResidenciaisAPI.Models;
 
 namespace SistemaControleGastosResidenciaisAPI.Repositories
@@ -15,6 +17,8 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
             var query = _context.Transactions.AsQueryable();
             var totalCount = await query.CountAsync();
             var transactions = await query
+                .Include(t => t.Category)
+                .Include(t => t.Person)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -29,8 +33,14 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
         }
         public async Task<Transaction> GetByIdAsync(Guid id)
         {
-            var transaction = await _context.FindAsync<Transaction>(id);
-            if(transaction == null)
+            var query = _context.Transactions.AsQueryable();
+            var totalCount = await query.CountAsync();
+            var transaction = await query
+                .Include(t => t.Category)
+                .Include(t => t.Person)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (transaction == null)
             {
                 throw new SqliteException("Transaction not found", 404);
             }

@@ -14,10 +14,8 @@ namespace SistemaControleGastosResidenciaisAPI.Models
         [EnumDataType(typeof(TransactionType))]
         public required TransactionType Type { get; set; }
         public Guid? CategoryId { get; set; }
-        [JsonIgnore]
         public virtual Category Category { get; set; }
         public Guid PersonId { get; set; }
-        [JsonIgnore]
         public virtual Person Person { get; set; }
 
         public static Transaction ToModel(CreateTransactionDTO transactionDTO)

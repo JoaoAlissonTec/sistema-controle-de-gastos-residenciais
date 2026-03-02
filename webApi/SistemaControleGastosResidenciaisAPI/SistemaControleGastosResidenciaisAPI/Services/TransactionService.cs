@@ -37,7 +37,7 @@ namespace SistemaControleGastosResidenciaisAPI.Services
             var category = transaction.CategoryId != null ? await _categoryRepository.GetByIdAsync((Guid)transaction.CategoryId) : null;
 
             //Usuário é menor de idade (menor de 18 anos), só é aceito despesas.
-            if (person.Age < 18 && transaction.Type == TransactionType.REVENUE) {
+            if (person.Age < 18 && transaction.Type == TransactionType.INCOME) {
                 throw new ArgumentException("Person under the age of 18 can only register expenses.", nameof(transaction.Type));
             }
             

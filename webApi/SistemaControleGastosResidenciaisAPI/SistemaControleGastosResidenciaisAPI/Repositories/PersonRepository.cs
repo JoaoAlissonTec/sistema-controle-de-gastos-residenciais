@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using SistemaControleGastosResidenciaisAPI.DTOs;
 using SistemaControleGastosResidenciaisAPI.Models;
 
 namespace SistemaControleGastosResidenciaisAPI.Repositories

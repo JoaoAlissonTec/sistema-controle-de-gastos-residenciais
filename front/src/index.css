@@ -1,1 +1,122 @@
 @import "tailwindcss";
+@theme {
+    --color-stormy-teal: oklch(0.5032 0.0855 194.78);
+    --color-dark-cyan: oklch(0.5752 0.1016 183.47);
+    --color-pearl-aqua: oklch(0.849 0.0514 182.3);
+    --color-linen: oklch(0.9337 0.019 67.59);
+    --color-onyx: oklch(0.1591 0 0);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 100;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-Thin.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 100;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-ThinItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 200;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-ExtraLight.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 200;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-ExtraLightItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 300;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-Light.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 300;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-LightItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-MediumItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-SemiBoldItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-BoldItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 800;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 800;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-ExtraBoldItalic.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 900;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-Black.ttf);
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 900;
+    font-style: italic;
+    src: local('Inter'), url(./assets/fonts/Inter/Inter_28pt-BlackItalic.ttf);
+}
+
+* {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

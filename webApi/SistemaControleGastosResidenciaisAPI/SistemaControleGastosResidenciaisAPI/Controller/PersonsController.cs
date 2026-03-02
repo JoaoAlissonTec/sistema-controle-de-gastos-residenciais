@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using SistemaControleGastosResidenciaisAPI.DTOs;
+using SistemaControleGastosResidenciaisAPI.Enums;
 using SistemaControleGastosResidenciaisAPI.Models;
 using SistemaControleGastosResidenciaisAPI.Services;
 
@@ -16,11 +17,18 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
         public PersonsController(IPersonService personService) => _personService = personService;
 
         [HttpGet]
-        public async Task<ActionResult<List<Person>>> GetPersons([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        public async Task<ActionResult<PagedResult<PersonResponseDTO>>> GetPersons([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
             try
             {
-                var persons = await _personService.GetAllAsync(page, pageSize);
+                var result = await _personService.GetAllAsync(page, pageSize);
+                var persons = new PagedResult<PersonResponseDTO>
+                {
+                    Page = result.Page,
+                    PageSize = result.PageSize,
+                    TotalCount = result.TotalCount,
+                    Data = result.Data.Select(PersonResponseDTO.ToDTO).ToList()
+                };
                 return Ok(persons);
             }
             catch (Exception) {
@@ -28,12 +36,49 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
             }
         }
 
+        [HttpGet("TotalTransactions")]
+        public async Task<ActionResult<PagedResultWithTotals<PersonWithTotalsResponseDTO>>> GetTotalTransactions([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        {
+            var result = await _personService.GetAllAsync(page, pageSize);
+
+            var totalIncome = result.Data.SelectMany(p => p.Transactions.Where(t => t.Type == TransactionType.INCOME)).Sum(t => t.Amount);
+            var totalExpense = result.Data.SelectMany(p => p.Transactions.Where(t => t.Type == TransactionType.EXPENSE)).Sum(t => t.Amount);
+            var balance = totalIncome - totalExpense;
+
+            var persons = new PagedResultWithTotals<PersonWithTotalsResponseDTO>
+            {
+                Page = result.Page,
+                PageSize = result.PageSize,
+                TotalCount = result.TotalCount,
+                TotalIncome = totalIncome,
+                TotalExpense = totalExpense,
+                Balance = balance,
+                Data = result.Data.Select(p => {
+                    var totalIncome = p.Transactions.Where(t => t.Type == TransactionType.INCOME).Sum(t => t.Amount);
+                    var totalExpense = p.Transactions.Where(t => t.Type == TransactionType.EXPENSE).Sum(t => t.Amount);
+                    var balance = totalIncome - totalExpense;
+                    return new PersonWithTotalsResponseDTO
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Age = p.Age,
+                        TotalIncome = totalIncome,
+                        TotalExpense = totalExpense,
+                        Balance = balance
+                    };
+                }).ToList()
+            };
+
+            return Ok(persons);
+        }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(Guid id)
+        public async Task<ActionResult<PersonResponseDTO>> GetPerson(Guid id)
         {
             try
             {
-                var person = await _personService.GetByIdAsync(id);
+                var result  = await _personService.GetByIdAsync(id);
+                var person = PersonResponseDTO.ToDTO(result);
                 return Ok(person);
             }catch(SqliteException ex) when (ex.SqliteErrorCode == 404)
             {
@@ -52,7 +97,9 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
                 var person = Person.ToModel(personDTO);
 
                 var createdPerson = await _personService.AddAsync(person);
-                return CreatedAtAction(nameof(GetPerson), new { id = createdPerson.Id }, createdPerson);
+
+                var personDTOResponse = PersonResponseDTO.ToDTO(createdPerson);
+                return CreatedAtAction(nameof(GetPerson), new { id = personDTOResponse.Id }, personDTOResponse);
             }
             catch (Exception ex) {
                 return Problem("An error occurred while processing your request.", statusCode: (int)HttpStatusCode.InternalServerError);
@@ -65,7 +112,8 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
             try
             {
                 var updatedPerson = await _personService.UpdateAsync(person);
-                return Ok(updatedPerson);
+                var personDTOResponse = PersonResponseDTO.ToDTO(updatedPerson);
+                return Ok(personDTOResponse);
             }
             catch (SqliteException ex) when (ex.SqliteErrorCode == 404)
             {
@@ -86,7 +134,8 @@ namespace SistemaControleGastosResidenciaisAPI.Controller
                 existingPerson.Name = person.Name ?? existingPerson.Name;
                 existingPerson.Age = person.Age ?? existingPerson.Age;
                 var updatedPerson = await _personService.UpdateAsync(existingPerson);
-                return Ok(updatedPerson);
+                var personDTOResponse = PersonResponseDTO.ToDTO(updatedPerson);
+                return Ok(personDTOResponse);
             }
             catch (SqliteException ex) when (ex.SqliteErrorCode == 404)
             {

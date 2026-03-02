@@ -2,7 +2,7 @@
 {
     public enum TransactionType
     {
-        REVENUE = 0,
+        INCOME = 0,
         EXPENSE = 1
     }
 }

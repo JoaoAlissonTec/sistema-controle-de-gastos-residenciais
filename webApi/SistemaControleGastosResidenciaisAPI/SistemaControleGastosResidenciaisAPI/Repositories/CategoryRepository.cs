@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using SistemaControleGastosResidenciaisAPI.DTOs;
 using SistemaControleGastosResidenciaisAPI.Models;
 
 namespace SistemaControleGastosResidenciaisAPI.Repositories
@@ -23,6 +24,7 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
             var totalCount = await query.CountAsync();
             var categories = await query
                 .Include(c => c.Transactions)
+                    .ThenInclude(t => t.Person)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -41,6 +43,7 @@ namespace SistemaControleGastosResidenciaisAPI.Repositories
             var query = _context.Categories.AsQueryable();
             var category = await query
                 .Include(c => c.Transactions)
+                    .ThenInclude(t => t.Person)
                 .FirstOrDefaultAsync(c => c.Id == id);
             if(category == null)
             {

@@ -1,4 +1,4 @@
-import Persons from "../services/persons";
+import { Persons } from "../services/persons";
 import { useQuery } from "@tanstack/react-query";
 
 export default function usePersons(page = 1) {

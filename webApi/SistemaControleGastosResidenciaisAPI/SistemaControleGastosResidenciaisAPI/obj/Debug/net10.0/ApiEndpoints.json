@@ -20,7 +20,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Category, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.PagedResult\u00601[[SistemaControleGastosResidenciaisAPI.DTOs.CategoryResponseDTO, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -46,7 +46,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "SistemaControleGastosResidenciaisAPI.Models.Category",
+        "Type": "SistemaControleGastosResidenciaisAPI.DTOs.CategoryResponseDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -72,7 +72,38 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "SistemaControleGastosResidenciaisAPI.Models.Category",
+        "Type": "SistemaControleGastosResidenciaisAPI.DTOs.CategoryResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SistemaControleGastosResidenciaisAPI.Controller.CategoriesController",
+    "Method": "GetTotalTransactions",
+    "RelativePath": "api/Categories/TotalTransactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.PagedResultWithTotals\u00601[[SistemaControleGastosResidenciaisAPI.DTOs.CategoryWithTotalsResponseDTO, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -103,7 +134,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Person, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.PagedResult\u00601[[SistemaControleGastosResidenciaisAPI.DTOs.PersonResponseDTO, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -181,7 +212,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "SistemaControleGastosResidenciaisAPI.Models.Person",
+        "Type": "SistemaControleGastosResidenciaisAPI.DTOs.PersonResponseDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -239,6 +270,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SistemaControleGastosResidenciaisAPI.Controller.PersonsController",
+    "Method": "GetTotalTransactions",
+    "RelativePath": "api/Persons/TotalTransactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.PagedResultWithTotals\u00601[[SistemaControleGastosResidenciaisAPI.DTOs.PersonWithTotalsResponseDTO, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "SistemaControleGastosResidenciaisAPI.Controller.TransactionsController",
     "Method": "GetTransactions",
     "RelativePath": "api/Transactions",
@@ -259,7 +321,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[SistemaControleGastosResidenciaisAPI.Models.Transaction, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "SistemaControleGastosResidenciaisAPI.Models.PagedResult\u00601[[SistemaControleGastosResidenciaisAPI.DTOs.TransactionDTO, SistemaControleGastosResidenciaisAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -285,7 +347,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "SistemaControleGastosResidenciaisAPI.Models.Transaction",
+        "Type": "SistemaControleGastosResidenciaisAPI.DTOs.TransactionDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -311,7 +373,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "SistemaControleGastosResidenciaisAPI.Models.Transaction",
+        "Type": "SistemaControleGastosResidenciaisAPI.DTOs.TransactionDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
