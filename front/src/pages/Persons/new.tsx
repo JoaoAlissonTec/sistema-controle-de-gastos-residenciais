@@ -12,6 +12,10 @@ export default function NewPerson() {
     const [age, setAge] = useState<number>()
     const {mutate, isPending, isSuccess, isError} = useCreatePerson()
 
+    useEffect(() => {
+        document.title = 'Nova pessoa';
+    }, [])
+
     function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
         if(isPending) return;
@@ -32,14 +36,16 @@ export default function NewPerson() {
     }, [isSuccess])
 
     return (
-        <div className="p-4">
-            <h1 className="text-lg font-bold">Nova pessoa</h1>
-            <form method="post" onSubmit={handleSubmit} className="flex flex-col space-y-2">
-                <Input label="Nome" placeholder="Digite o nome" onChange={(event) => setName(event.target.value)}/>
-                <Input label="Idade" placeholder="Digite a idade" type="number" onChange={(event) => setAge(Number(event.target.value))}/>
-                <Button type="submit" variant="primary" isLoading={isPending}>Cadastrar</Button>
-            </form>
-            {isError && <p>Erro ao cadastrar nova pessoa.</p>}
+        <div className="p-3">
+            <div className="bg-white p-4 rounded-lg">
+                <h1 className="text-lg font-bold">Nova pessoa</h1>
+                <form method="post" onSubmit={handleSubmit} className="flex flex-col space-y-2">
+                    <Input label="Nome" placeholder="Digite o nome" onChange={(event) => setName(event.target.value)}/>
+                    <Input label="Idade" placeholder="Digite a idade" type="number" onChange={(event) => setAge(Number(event.target.value))}/>
+                    <Button type="submit" variant="primary" isLoading={isPending}>Cadastrar</Button>
+                </form>
+                {isError && <p>Erro ao cadastrar nova pessoa.</p>}
+            </div>
         </div>
     )
 }

@@ -19,7 +19,7 @@ export default function Pagination({ selectedPage, totalPages, fnChangePage }: P
             <button
                 onClick={() => { fnChangePage(selectedPage - 1) }}
                 className="border border-transparent px-2 rounded cursor-pointer hover:bg-gray-200 disabled:bg-white disabled:text-gray-400"
-                disabled={selectedPage == 1}>Previous</button>
+                disabled={selectedPage == 1}>Anterior</button>
 
             {Array.from({ length: end - start + 1 }, (_, i) => {
                 const page = start + i
@@ -39,7 +39,7 @@ export default function Pagination({ selectedPage, totalPages, fnChangePage }: P
             <button
                 onClick={() => { fnChangePage(selectedPage + 1) }}
                 className="border border-transparent px-2 rounded cursor-pointer hover:bg-gray-200 disabled:bg-white disabled:text-gray-400"
-                disabled={selectedPage == totalPages}>Next</button>
+                disabled={selectedPage == totalPages}>Próximo</button>
         </div>
     )
 }

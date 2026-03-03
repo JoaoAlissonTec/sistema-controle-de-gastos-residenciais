@@ -12,6 +12,14 @@ export interface Transaction {
     category: Category
 }
 
+export interface TransactionCreate {
+    description: string,
+    amount: number,
+    type: number,
+    personId: string,
+    categoryId: string
+}
+
 export function Transactions() {
     async function getAll(page = 1): Promise<PagedResult<Transaction[]> | undefined> {
         try{
@@ -35,5 +43,16 @@ export function Transactions() {
         }
     }
 
-    return {getAll, getByPersonId}
+    async function add(transaction: TransactionCreate): Promise<Transaction | undefined> {
+        try {
+            const response = await api.post("/Transactions", transaction);
+            const data = response.data;
+
+            return data;
+        }catch(err) {
+            throw err;
+        }
+    }
+
+    return {getAll, getByPersonId, add}
 }

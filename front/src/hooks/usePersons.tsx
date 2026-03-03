@@ -1,13 +1,13 @@
 import { Persons } from "../services/persons";
 import { useQuery } from "@tanstack/react-query";
 
-export default function usePersons(page = 1) {
+export default function usePersons(page = 1, pageSize = 20) {
 
     const personsAPI = Persons()
 
     const {data, isPending, error} = useQuery({
         queryKey: ['persons', page], 
-        queryFn: () => personsAPI.getAll(page),
+        queryFn: () => personsAPI.getAll(page, pageSize),
         placeholderData: (previousData, _) => previousData
     })
 

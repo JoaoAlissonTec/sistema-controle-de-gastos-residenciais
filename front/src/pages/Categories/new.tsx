@@ -27,24 +27,30 @@ export default function NewCategory() {
     }
 
     useEffect(() => {
+        document.title = 'Nova categoria';
+    }, [])
+
+    useEffect(() => {
         if(isSuccess) {
             navigate("/categories")
         }
     }, [isSuccess])
 
     return (
-        <div className="p-4">
-            <h1 className="text-lg font-bold">Nova categoria</h1>
-            <form method="post" onSubmit={handleSubmit} className="flex flex-col space-y-2">
-                <Input label="Descrição" placeholder="Digite a descrição" onChange={(event) => setDescription(event.target.value)}/>
-                <Select onChange={(event) => setType(Number(event.target.value))} options={[
-                    {value: 0, label: "Receita"},
-                    {value: 1, label: "Despesa"},
-                    {value: 2, label: "Ambas"},
-                ]}/>
-                <Button type="submit" variant="primary" isLoading={isPending}>Cadastrar</Button>
-            </form>
-            {isError && <p>Erro ao cadastrar nova pessoa.</p>}
+        <div className="p-3">
+            <div className="bg-white p-4 rounded-lg">
+                <h1 className="text-lg font-bold">Nova categoria</h1>
+                <form method="post" onSubmit={handleSubmit} className="flex flex-col space-y-2">
+                    <Input label="Descrição" placeholder="Digite a descrição" onChange={(event) => setDescription(event.target.value)}/>
+                    <Select onChange={(event) => setType(Number(event.target.value))} options={[
+                        {value: 0, label: "Receita"},
+                        {value: 1, label: "Despesa"},
+                        {value: 2, label: "Ambas"},
+                    ]}/>
+                    <Button type="submit" variant="primary" isLoading={isPending}>Cadastrar</Button>
+                </form>
+                {isError && <p>Erro ao cadastrar nova pessoa.</p>}
+            </div>
         </div>
     )
 }

@@ -16,9 +16,9 @@ interface CategoryWithTotals extends Category {
 }
 
 export function Categories() {
-    async function getAll(page = 1): Promise<PagedResultWithTotals<CategoryWithTotals[]> | undefined> {
+    async function getAll(page = 1, pageSize = 20): Promise<PagedResultWithTotals<CategoryWithTotals[]> | undefined> {
         try {
-            const response = await api.get(`Categories/TotalTransactions?page=${page}`);
+            const response = await api.get(`Categories/TotalTransactions?page=${page}&pageSize=${pageSize}`);
             const data = response.data;
 
             return data;

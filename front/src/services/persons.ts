@@ -16,9 +16,9 @@ interface PersonWithTotals extends Person {
 }
 
 export function Persons() {
-    async function getAll(page = 1): Promise<PagedResultWithTotals<PersonWithTotals[]> | undefined> {
+    async function getAll(page = 1, pageSize = 20): Promise<PagedResultWithTotals<PersonWithTotals[]> | undefined> {
         try{
-            const response = await api.get(`/Persons/TotalTransactions?page=${page}`)
+            const response = await api.get(`/Persons/TotalTransactions?page=${page}&pageSize=${pageSize}`)
             const data = response.data;
 
             return data
@@ -49,5 +49,24 @@ export function Persons() {
         }
     }
 
-    return {getAll, getById, add}
+    async function update(person: Person): Promise<Person | undefined> {
+        try {
+            const response = await api.put("/Persons", person);
+            const data = response.data;
+
+            return data;
+        }catch(err) {
+            throw err;
+        }
+    }
+
+    async function deletePerson(id: string) {
+        try {
+            await api.delete(`/Persons/${id}`)
+        }catch(err) {
+            throw err;
+        }
+    }
+
+    return {getAll, getById, add, update, deletePerson}
 }
