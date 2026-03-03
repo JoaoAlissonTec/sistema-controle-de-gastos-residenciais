@@ -19,7 +19,7 @@ namespace SistemaControleGastosResidenciaisAPI.Models
         public virtual Person Person { get; set; }
 
         public static Transaction ToModel(CreateTransactionDTO transactionDTO)
-        {
+        { 
             return new Transaction
             {
                 Id = Guid.NewGuid(),
